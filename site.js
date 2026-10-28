@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const field = searchForm.querySelector("input");
       const term = (field?.value || "").trim().toLowerCase();
       const pages = [
-        ["Home","index.html"],["About Us","about.html"],["Our History","history.html"],
+        ["Home","index.html"],["About Us","about.html"],["Our History","history.html"], 
         ["Vision and Mission","vision-mission.html"],["Our Beliefs","beliefs.html"],
         ["Our Leadership","leadership.html"],["Plan a Visit","plan-a-visit.html"],
         ["Church Services","services.html"],["Ministries","ministries.html"],["Events","events.html"],
