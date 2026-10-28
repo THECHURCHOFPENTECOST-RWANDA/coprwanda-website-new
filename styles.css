@@ -354,3 +354,16 @@ h2 { line-height: 1.2; letter-spacing: -.025em; }
   }
 }
 
+/* Navigation spacing improvement */
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.main-nav a {
+  padding: 10px 12px;
+  line-height: 1.5;
+}
+
