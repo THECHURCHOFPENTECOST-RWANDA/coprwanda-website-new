@@ -99,3 +99,96 @@ h2 { line-height: 1.2; letter-spacing: -.025em; }
   .footer-links { grid-template-columns: 1fr 1fr; }
   .cookie-banner { align-items: flex-start; flex-direction: column; }
 }
+
+
+/* COPIRWA Professional Navigation Upgrade */
+
+.site-header {
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 18px 28px;
+  gap: 24px;
+}
+
+.brand {
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+}
+
+.brand-copy strong {
+  color: #064b31;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.brand-copy span {
+  color: #5d7067;
+  font-size: 0.78rem;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.main-nav a {
+  position: relative;
+  padding: 10px 12px;
+  color: #18352a;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+.main-nav a:hover,
+.main-nav a[aria-current="page"] {
+  color: #087447;
+  background: #eef7f1;
+}
+
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  height: 2px;
+  background: #c9a64b;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 1020px) {
+  .header-inner {
+    padding: 14px 18px;
+  }
+
+  .main-nav {
+    gap: 2px;
+  }
+
+  .main-nav a {
+    padding: 9px 10px;
+  }
+}
