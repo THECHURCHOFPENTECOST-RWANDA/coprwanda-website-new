@@ -380,4 +380,49 @@ height: 76px;
   align-items: center;
   gap: 12px;
 }
+/* COPIRWA Homepage Hero Card - Enhanced Design */
+.hero-card {
+  padding: 42px 36px;
+  border-radius: 24px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.07)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(12px);
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.hero-card .big-mark {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+
+.hero-card h2 {
+  font-size: 22px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.hero-card p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .hero-card {
+    padding: 28px 24px;
+    min-height: auto;
+  }
+}
 
