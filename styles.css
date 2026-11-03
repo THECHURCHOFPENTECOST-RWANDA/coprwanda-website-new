@@ -426,3 +426,98 @@ height: 76px;
   }
 }
 
+/* COPIRWA HOMEPAGE - SECTION DESIGN IMPROVEMENTS */
+
+.section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 85px 24px;
+}
+
+.section-heading {
+  max-width: 760px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.section-heading h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.2;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5eee8;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 28px rgba(8, 48, 31, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(8, 48, 31, 0.12);
+}
+
+.card h3 {
+  color: var(--green-dark);
+  margin-bottom: 12px;
+  font-size: 21px;
+}
+
+.card p {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.feature-band {
+  background: linear-gradient(135deg, #064b31, #087447);
+  color: #ffffff;
+  padding: 65px 24px;
+}
+
+.feature-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 45px;
+  align-items: center;
+}
+
+.feature-inner h2 {
+  color: #ffffff;
+  font-size: 30px;
+  margin-bottom: 14px;
+}
+
+.feature-inner p {
+  color: #e7f3ec;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 20px;
+  }
+
+  .card-grid,
+  .feature-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
