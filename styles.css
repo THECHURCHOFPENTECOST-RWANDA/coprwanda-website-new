@@ -366,4 +366,18 @@ h2 { line-height: 1.2; letter-spacing: -.025em; }
   padding: 10px 12px;
   line-height: 1.5;
 }
+/* Official COPIRWA logo */
+.brand-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
