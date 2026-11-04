@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Official News and Announcements of The Church of Pentecost International, Rwanda.">
+    <title>News & Announcements | COPIRWA</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .news-page {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 24px 70px;
+        }
+
+        .news-hero {
+            background: linear-gradient(120deg, #064d36, #087a50);
+            color: white;
+            padding: 65px 35px;
+            border-radius: 18px;
+            margin-bottom: 35px;
+        }
+
+        .news-hero h1 {
+            font-size: clamp(30px, 5vw, 46px);
+            margin: 0 0 15px;
+            color: white;
+        }
+
+        .news-hero p {
+            max-width: 700px;
+            line-height: 1.8;
+            font-size: 17px;
+            color: #f0fff6;
+        }
+
+        .news-eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #e5c46a;
+        }
+
+        .news-section {
+            margin-top: 45px;
+        }
+
+        .news-section h2 {
+            color: #104d38;
+            font-size: 27px;
+            margin-bottom: 20px;
+        }
+
+        .news-categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .news-category {
+            display: block;
+            text-decoration: none;
+            color: #164d38;
+            background: #f1f7f3;
+            border: 1px solid #dcebe1;
+            border-radius: 12px;
+            padding: 22px 18px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .news-category:hover {
+            background: #e3f1e8;
+            transform: translateY(-2px);
+        }
+
+        .news-featured {
+            background: #f5f8f6;
+            border: 1px solid #e2ebe5;
+            border-radius: 16px;
+            padding: 35px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .news-featured p,
+        .news-empty p {
+            color: #617269;
+            line-height: 1.8;
+        }
+
+        .news-empty {
+            background: #fff;
+            border: 1px dashed #b9cfc0;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .news-search {
+            width: 100%;
+            max-width: 600px;
+            padding: 14px 16px;
+            border: 1px solid #cbd9d0;
+            border-radius: 9px;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .news-filter button {
+            border: 1px solid #d3e2d8;
+            background: #f3f8f4;
+            color: #174d37;
+            padding: 10px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .news-filter button.active,
+        .news-filter button:hover {
+            background: #087a50;
+            color: white;
+        }
+
+        .news-card-area {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .news-placeholder {
+            background: #f6f9f7;
+            border: 1px solid #e0eae3;
+            padding: 25px;
+            border-radius: 12px;
+            min-height: 125px;
+        }
+
+        .news-placeholder h3 {
+            color: #174d37;
+            font-size: 17px;
+            margin-top: 0;
+        }
+
+        .news-placeholder p {
+            color: #66766c;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .news-admin-note {
+            background: #fff9e9;
+            border-left: 4px solid #c89b32;
+            padding: 18px 22px;
+            border-radius: 5px;
+            line-height: 1.7;
+            color: #655323;
+        }
+
+        @media (max-width: 768px) {
+            .news-categories,
+            .news-card-area {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .news-hero {
+                padding: 42px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .news-categories,
+            .news-card-area {
+                grid-template-columns: 1fr;
+            }
+
+            .news-page {
+                padding: 25px 16px 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="header-inner">
+
+            <a href="index.html" class="brand">
+                <img src="NEW%20COP%20LOGO.jpg"
+                     alt="Church of Pentecost Logo"
+                     class="brand-logo">
+
+                <span class="brand-text">
+                    <strong>THE CHURCH OF PENTECOST</strong>
+                    <small>INTERNATIONAL RWANDA</small>
+                </span>
+            </a>
+
+            <button class="menu-toggle"
+                    type="button"
+                    aria-label="Open navigation"
+                    aria-expanded="false">
+                ☰
+            </button>
+
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="history.html">Our History</a>
+                <a href="vision-mission.html">Vision and Mission</a>
+                <a href="beliefs.html">Our Beliefs</a>
+                <a href="leadership.html">Our Leadership</a>
+                <a href="news.html" aria-current="page">News & Announcements</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main class="news-page">
+
+        <section class="news-hero">
+            <span class="news-eyebrow">COPIRWA OFFICIAL NEWSROOM</span>
+
+            <h1>NEWS & ANNOUNCEMENTS</h1>
+
+            <p>
+                Welcome to the official News and Announcements platform
+                of The Church of Pentecost International, Rwanda.
+                Stay informed about the Church's national activities,
+                leadership, ministries, missions and community impact.
+            </p>
+        </section>
+
+        <section class="news-section">
+            <h2>News Categories</h2>
+
+            <div class="news-categories">
+                <a class="news-category" href="#national-news">
+                    National News
+                </a>
+
+                <a class="news-category" href="#leadership-news">
+                    Leadership News
+                </a>
+
+                <a class="news-category" href="#ministry-news">
+                    Ministry News
+                </a>
+
+                <a class="news-category" href="#mission-news">
+                    Mission and Evangelism
+                </a>
+
+                <a class="news-category" href="#community-impact">
+                    Community Impact
+                </a>
+
+                <a class="news-category" href="#official-announcements">
+                    Official Announcements
+                </a>
+            </div>
+        </section>
+
+        <section class="news-section">
+            <h2>Featured National News</h2>
+
+            <div class="news-featured">
+                <p>
+                    Official featured news articles will appear here
+                    after editorial approval and publication.
+                </p>
+            </div>
+        </section>
+
+        <section class="news-section" id="latest-news">
+            <h2>Latest News</h2>
+
+            <input
+                type="search"
+                id="newsSearch"
+                class="news-search"
+                placeholder="Search published news..."
+                aria-label="Search published news">
+
+            <div class="news-filter">
+                <button class="active" data-filter="all">All News</button>
+                <button data-filter="national-news">National News</button>
+                <button data-filter="leadership-news">Leadership News</button>
+                <button data-filter="ministry-news">Ministry News</button>
+                <button data-filter="mission-news">Mission and Evangelism</button>
+                <button data-filter="community-impact">Community Impact</button>
+                <button data-filter="official-announcements">Official Announcements</button>
+            </div>
+
+            <div class="news-card-area" id="newsResults">
+
+                <article class="news-placeholder" data-category="national-news">
+                    <h3>National News</h3>
+                    <p>Official national news will appear here after approval.</p>
+                </article>
+
+                <article class="news-placeholder" data-category="leadership-news">
+                    <h3>Leadership News</h3>
+                    <p>Official leadership news will appear here after approval.</p>
+                </article>
+
+                <article class="news-placeholder" data-category="ministry-news">
+                    <h3>Ministry News</h3>
+                    <p>Official ministry news will appear here after approval.</p>
+                </article>
+
+                <article class="news-placeholder" data-category="mission-news">
+                    <h3>Mission and Evangelism</h3>
+                    <p>Official mission news will appear here after approval.</p>
+                </article>
+
+                <article class="news-placeholder" data-category="community-impact">
+                    <h3>Community Impact</h3>
+                    <p>Official community impact stories will appear here after approval.</p>
+                </article>
+
+                <article class="news-placeholder" data-category="official-announcements">
+                    <h3>Official Announcements</h3>
+                    <p>Official church announcements will appear here after approval.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="news-section" id="official-announcements">
+            <h2>Official Announcements</h2>
+
+            <div class="news-empty">
+                <p>
+                    Official announcements authorised for public release
+                    will be published in this section.
+                </p>
+            </div>
+        </section>
+
+        <section class="news-section">
+            <h2>Our Editorial Commitment</h2>
+
+            <div class="news-admin-note">
+                All official news and announcements published on this
+                platform are subject to national editorial review and
+                approval by the authorised National Head or National
+                Media Ministry Leader.
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <h3>THE CHURCH OF PENTECOST INTERNATIONAL, RWANDA</h3>
+
+            <p>
+                Bible-believing. Spirit-led. Unleashed to transform.
+            </p>
+
+            <p>
+                © <span id="currentYear"></span>
+                The Church of Pentecost International, Rwanda.
+                All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById("newsSearch");
+        const newsCards = document.querySelectorAll(".news-placeholder");
+        const filterButtons = document.querySelectorAll(".news-filter button");
+
+        let selectedCategory = "all";
+
+        function filterNews() {
+            const searchText = searchInput.value.toLowerCase();
+
+            newsCards.forEach(card => {
+                const category = card.dataset.category;
+                const text = card.textContent.toLowerCase();
+
+                const categoryMatches =
+                    selectedCategory === "all" ||
+                    category === selectedCategory;
+
+                const searchMatches = text.includes(searchText);
+
+                card.style.display =
+                    categoryMatches && searchMatches ? "" : "none";
+            });
+        }
+
+        filterButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                selectedCategory = button.dataset.filter;
+
+                filterButtons.forEach(item =>
+                    item.classList.remove("active")
+                );
+
+                button.classList.add("active");
+                filterNews();
+            });
+        });
+
+        searchInput.addEventListener("input", filterNews);
+
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+
+        const menuButton = document.querySelector(".menu-toggle");
+        const navigation = document.querySelector(".main-nav");
+
+        if (menuButton && navigation) {
+            menuButton.addEventListener("click", () => {
+                const isOpen = navigation.classList.toggle("active");
+                menuButton.setAttribute("aria-expanded", isOpen);
+            });
+        }
+    </script>
+
+</body>
+</html>
