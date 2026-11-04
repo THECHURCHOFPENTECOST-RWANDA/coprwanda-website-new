@@ -268,5 +268,13 @@
 <script src="site.js"></script>
 <script>document.querySelectorAll('[data-current-year]').forEach(el => el.textContent = new Date().getFullYear());</script>
 
+  <script type="module">
+  import { supabase } from './supabase.js';
+
+  window.supabase = supabase;
+
+  console.log('COPIRWA Supabase connected successfully!');
+</script>
+
 </body>
 </html>
