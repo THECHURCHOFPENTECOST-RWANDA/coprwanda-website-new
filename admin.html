@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COPIRWA News Admin</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f7f4;color:#173d2d}
+header{background:#075337;color:white;padding:22px}
+main{max-width:850px;margin:35px auto;padding:20px}
+.panel{background:white;padding:28px;border-radius:12px;box-shadow:0 3px 15px #0001}
+h1{margin-top:0}
+label{display:block;font-weight:bold;margin:17px 0 7px}
+input,textarea,select{width:100%;padding:12px;border:1px solid #ccd8d0;border-radius:7px;font-size:15px}
+textarea{min-height:180px;resize:vertical}
+button{background:#087a50;color:white;border:0;padding:13px 20px;border-radius:7px;cursor:pointer;font-weight:bold;margin-top:18px}
+button:hover{background:#064d36}
+.secondary{background:#555}
+#dashboard{display:none}
+#status{margin-top:15px;font-weight:bold;white-space:pre-wrap}
+small{color:#63756a}
+</style>
+</head>
+<body>
+<header>
+<h2>THE CHURCH OF PENTECOST INTERNATIONAL, RWANDA</h2>
+<p>News & Announcements Administration</p>
+</header>
+
+<main>
+<section class="panel" id="login">
+<h1>Administrator Login</h1>
+<p>Sign in with your authorized COPIRWA administrator account.</p>
+<label>Email address</label>
+<input type="email" id="email" placeholder="Administrator email">
+<label>Password</label>
+<input type="password" id="password" placeholder="Password">
+<button id="loginBtn">Login</button>
+<div id="loginStatus"></div>
+</section>
+
+<section class="panel" id="dashboard">
+<h1>Add News & Announcement</h1>
+<p><small>Complete the details below and publish your article.</small></p>
+
+<label>Article title</label>
+<input id="title" placeholder="Enter article title">
+
+<label>Category</label>
+<select id="category">
+<option value="national-news">National News</option>
+<option value="leadership-news">Leadership News</option>
+<option value="ministry-news">Ministry News</option>
+<option value="mission-news">Mission and Evangelism</option>
+<option value="community-impact">Community Impact</option>
+<option value="official-announcements">Official Announcements</option>
+</select>
+
+<label>Article content</label>
+<textarea id="content" placeholder="Write your news article here..."></textarea>
+
+<label>Cover photograph</label>
+<input type="file" id="cover" accept="image/*">
+
+<label>Additional gallery photographs</label>
+<input type="file" id="gallery" accept="image/*" multiple>
+
+<p><small>You can select several photographs for the article gallery.</small></p>
+
+<button id="publishBtn">Publish Article</button>
+<button class="secondary" id="logoutBtn">Logout</button>
+<div id="status"></div>
+</section>
+</main>
+
+<script type="module">
+import { supabase } from './supabase.js';
+
+const loginPanel = document.getElementById('login');
+const dashboard = document.getElementById('dashboard');
+const loginStatus = document.getElementById('loginStatus');
+const status = document.getElementById('status');
+
+async function checkSession(){
+  const {data} = await supabase.auth.getSession();
+  if(data.session){
+    loginPanel.style.display='none';
+    dashboard.style.display='block';
+  }
+}
+
+document.getElementById('loginBtn').onclick = async () => {
+  loginStatus.textContent='Signing in...';
+  const {error} = await supabase.auth.signInWithPassword({
+    email:document.getElementById('email').value.trim(),
+    password:document.getElementById('password').value
+  });
+  if(error){
+    loginStatus.textContent='Login failed: '+error.message;
+    return;
+  }
+  loginPanel.style.display='none';
+  dashboard.style.display='block';
+};
+
+document.getElementById('logoutBtn').onclick = async () => {
+  await supabase.auth.signOut();
+  dashboard.style.display='none';
+  loginPanel.style.display='block';
+  status.textContent='';
+};
+
+async function uploadPhoto(file){
+  const extension=file.name.split('.').pop();
+  const path=Date.now()+'-'+crypto.randomUUID()+'.'+extension;
+  const {error}=await supabase.storage
+    .from('new-photos')
+    .upload(path,file);
+  if(error) throw error;
+
+  const {data}=supabase.storage
+    .from('new-photos')
+    .getPublicUrl(path);
+  return data.publicUrl;
+}
+
+document.getElementById('publishBtn').onclick = async () => {
+  const button=document.getElementById('publishBtn');
+  button.disabled=true;
+  status.textContent='Publishing your article...';
+
+  try{
+    const title=document.getElementById('title').value.trim();
+    const content=document.getElementById('content').value.trim();
+    const category=document.getElementById('category').value;
+    const coverFile=document.getElementById('cover').files[0];
+    const galleryFiles=[...document.getElementById('gallery').files];
+
+    if(!title || !content){
+      throw new Error('Please enter the article title and content.');
+    }
+
+    let image_url=null;
+    if(coverFile) image_url=await uploadPhoto(coverFile);
+
+    const gallery_images=[];
+    for(const file of galleryFiles){
+      gallery_images.push(await uploadPhoto(file));
+    }
+
+    const {error}=await supabase
+      .from('news_announcements')
+      .insert([{
+        title,
+        content,
+        category,
+        image_url,
+        gallery_images,
+        published:true
+      }]);
+
+    if(error) throw error;
+
+    status.textContent='Success! Your article has been published.';
+    document.getElementById('title').value='';
+    document.getElementById('content').value='';
+    document.getElementById('cover').value='';
+    document.getElementById('gallery').value='';
+  }catch(error){
+    status.textContent='Could not publish: '+error.message;
+  }finally{
+    button.disabled=false;
+  }
+};
+
+checkSession();
+</script>
+</body>
+</html>
