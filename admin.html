@@ -83,14 +83,51 @@ const dashboard = document.getElementById('dashboard');
 const loginStatus = document.getElementById('loginStatus');
 const status = document.getElementById('status');
 
-async function checkSession(){
+const allowedRoles = [
+  'builder_admin',
+  'national_head',
+  'national_secretary',
+  'media_team',
+  'news_assistant'
+];
+
+async function getCurrentUserRole(user) {
+  const { data, error } = await supabase
+    .from('site_user_roles')
+    .select('role')
+    .eq('user_id', user.id)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data?.role || null;
+}
+
+async function checkSession() {
   const { data } = await supabase.auth.getSession();
   const user = data.session?.user;
 
-  if (user?.email === 'thecophuyedistrict400@gmail.com') {
+  if (!user) {
+    dashboard.style.display = 'none';
+    loginPanel.style.display = 'block';
+    return;
+  }
+
+  try {
+    const role = await getCurrentUserRole(user);
+
+    if (!allowedRoles.includes(role)) {
+      await supabase.auth.signOut();
+      dashboard.style.display = 'none';
+      loginPanel.style.display = 'block';
+      loginStatus.textContent = 'Access denied. Your account has no publishing permission.';
+      return;
+    }
+
     loginPanel.style.display = 'none';
     dashboard.style.display = 'block';
-  } else {
+
+  } catch (error) {
+    loginStatus.textContent = 'Could not verify your role: ' + error.message;
     await supabase.auth.signOut();
     dashboard.style.display = 'none';
     loginPanel.style.display = 'block';
@@ -98,6 +135,24 @@ async function checkSession(){
 }
 
 document.getElementById('loginBtn').onclick = async () => {
+  loginStatus.textContent = 'Signing in...';
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email: document.getElementById('email').value.trim(),
+    password: document.getElementById('password').value
+  });
+
+  if (error) {
+    loginStatus.textContent = 'Login failed: ' + error.message;
+    return;
+  }
+
+  await checkSession();
+
+  if (dashboard.style.display === 'block') {
+    loginStatus.textContent = 'Login successful.';
+  }
+};
   loginStatus.textContent = 'Signing in...';
 
   const { error } = await supabase.auth.signInWithPassword({
