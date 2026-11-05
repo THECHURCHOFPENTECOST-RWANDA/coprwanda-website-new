@@ -294,6 +294,74 @@
         height: 180px !important;
     }
 }
+ /* COPIRWA FINAL HORIZONTAL NEWS LAYOUT */
+
+.news-card-area {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+}
+
+.news-card {
+    display: grid !important;
+    grid-template-columns: 38% minmax(0, 1fr) !important;
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+    gap: 16px 24px !important;
+    align-items: start !important;
+}
+
+.news-card > img {
+    grid-column: 1 !important;
+    grid-row: 1 / 5 !important;
+    width: 100% !important;
+    height: 300px !important;
+    max-height: none !important;
+    object-fit: cover !important;
+}
+
+.news-card > h3 {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+}
+
+.news-card > p:nth-of-type(1) {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+}
+
+.news-card > p:nth-of-type(2) {
+    grid-column: 2 !important;
+    grid-row: 3 !important;
+}
+
+.news-card > small {
+    grid-column: 2 !important;
+    grid-row: 4 !important;
+}
+
+.news-card > h4 {
+    grid-column: 1 / -1 !important;
+    grid-row: 5 !important;
+}
+
+.news-card > div {
+    grid-column: 1 / -1 !important;
+    grid-row: 6 !important;
+}
+
+@media (max-width: 600px) {
+    .news-card {
+        grid-template-columns: 38% minmax(0, 1fr) !important;
+        gap: 10px !important;
+        padding: 12px !important;
+    }
+
+    .news-card > img {
+        height: 180px !important;
+    }
+}       
     </style>
 </head>
 
