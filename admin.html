@@ -84,25 +84,42 @@ const loginStatus = document.getElementById('loginStatus');
 const status = document.getElementById('status');
 
 async function checkSession(){
-  const {data} = await supabase.auth.getSession();
-  if(data.session){
-    loginPanel.style.display='none';
-    dashboard.style.display='block';
+  const { data } = await supabase.auth.getSession();
+  const user = data.session?.user;
+
+  if (user?.email === 'thecophuyedistrict400@gmail.com') {
+    loginPanel.style.display = 'none';
+    dashboard.style.display = 'block';
+  } else {
+    await supabase.auth.signOut();
+    dashboard.style.display = 'none';
+    loginPanel.style.display = 'block';
   }
 }
 
 document.getElementById('loginBtn').onclick = async () => {
-  loginStatus.textContent='Signing in...';
-  const {error} = await supabase.auth.signInWithPassword({
-    email:document.getElementById('email').value.trim(),
-    password:document.getElementById('password').value
+  loginStatus.textContent = 'Signing in...';
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email: document.getElementById('email').value.trim(),
+    password: document.getElementById('password').value
   });
-  if(error){
-    loginStatus.textContent='Login failed: '+error.message;
+
+  if (error) {
+    loginStatus.textContent = 'Login failed: ' + error.message;
     return;
   }
-  loginPanel.style.display='none';
-  dashboard.style.display='block';
+
+  const { data } = await supabase.auth.getSession();
+
+  if (data.session?.user?.email !== 'thecophuyedistrict400@gmail.com') {
+    await supabase.auth.signOut();
+    loginStatus.textContent = 'Access denied. Administrator only.';
+    return;
+  }
+
+  loginPanel.style.display = 'none';
+  dashboard.style.display = 'block';
 };
 
 document.getElementById('logoutBtn').onclick = async () => {
