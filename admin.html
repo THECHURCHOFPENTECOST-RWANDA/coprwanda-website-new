@@ -301,7 +301,56 @@ document.getElementById('publishBtn').onclick = async () => {
     button.disabled=false;
   }
 };
+// SAVE EVENT TO SUPABASE
+document.getElementById('saveEventBtn').addEventListener('click', async () => {
+  const button = document.getElementById('saveEventBtn');
+  const message = document.getElementById('eventStatus');
 
+  const title = document.getElementById('eventTitle').value.trim();
+  const category = document.getElementById('eventCategory').value;
+  const event_date = document.getElementById('eventDate').value;
+  const location = document.getElementById('eventLocation').value.trim();
+  const description = document.getElementById('eventDescription').value.trim();
+
+  if (!title || !event_date || !description) {
+    message.textContent = 'Please complete the required fields.';
+    return;
+  }
+
+  button.disabled = true;
+  message.textContent = 'Saving event...';
+
+  try {
+    const { data: sessionData } = await supabase.auth.getSession();
+    const user = sessionData.session?.user;
+
+    if (!user) throw new Error('Please log in again.');
+
+    const { error } = await supabase.from('events').insert([{
+      title,
+      category,
+      event_date,
+      location: location || null,
+      description,
+      published: true,
+      created_by: user.id
+    }]);
+
+    if (error) throw error;
+
+    message.textContent = 'Event saved successfully!';
+
+    document.getElementById('eventTitle').value = '';
+    document.getElementById('eventDate').value = '';
+    document.getElementById('eventLocation').value = '';
+    document.getElementById('eventDescription').value = '';
+
+  } catch (error) {
+    message.textContent = 'Error: ' + error.message;
+  } finally {
+    button.disabled = false;
+  }
+});
 checkSession();
 </script>
 </body>
