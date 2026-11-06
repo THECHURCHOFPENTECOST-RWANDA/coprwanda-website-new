@@ -42,10 +42,21 @@ small{color:#63756a}
 </section>
 
 <section class="panel" id="dashboard">
-<h1>Add News & Announcement</h1>
-<p><small>Complete the details below and publish your article.</small></p>
+<h1>COPIRWA Admin Dashboard</h1>
+<p><small>Manage website content, events, news, media and church information from one central dashboard.</small></p>
 
-<label>Article title</label>
+<nav class="admin-navigation">
+  <button type="button" onclick="showSection('overview')">Main Dashboard</button>
+  <button type="button" onclick="showSection('news')">News Manager</button>
+  <button type="button" onclick="showSection('events')">Event Manager</button>
+  <button type="button" onclick="showSection('media')">Media Manager</button>
+  <button type="button" onclick="showSection('pages')">Website Page Editor</button>
+  <button type="button" onclick="showSection('leadership')">Leadership & Ministries</button>
+  <button type="button" onclick="showSection('users')">User Management</button>
+  <button type="button" onclick="showSection('settings')">Website Settings</button>
+</nav>
+ <div id="news" class="admin-section">
+  <label>Article title</label>
 <input id="title" placeholder="Enter article title">
 
 <label>Category</label>
@@ -70,6 +81,7 @@ small{color:#63756a}
 <p><small>You can select several photographs for the article gallery.</small></p>
 
 <button id="publishBtn">Publish Article</button>
+   </div>
 <button class="secondary" id="logoutBtn">Logout</button>
 <div id="status"></div>
 </section>
@@ -83,7 +95,18 @@ const dashboard = document.getElementById('dashboard');
 const loginStatus = document.getElementById('loginStatus');
 const status = document.getElementById('status');
 
-const allowedRoles = [
+function showSection(sectionId) {
+  document.querySelectorAll('.admin-section').forEach(section => {
+    section.style.display = 'none';
+  });
+
+  const selectedSection = document.getElementById(sectionId);
+
+  if (selectedSection) {
+    selectedSection.style.display = 'block';
+  }
+}
+  const allowedRoles = [
   'builder_admin',
   'national_head',
   'national_secretary',
